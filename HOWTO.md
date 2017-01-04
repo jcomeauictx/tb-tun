@@ -10,7 +10,7 @@ I compiled the source file on Debian 5.0 kernel 2.6.32-trunk-686 with gcc versio
 
 You should first know what is 6to4 tunnel(or tunnelbroker or ISATAP).
 
-6to4 encapsulates IPv6 package in IPv4 package. To use 6to4, A relay server and a public IPv4 address for the client is necessary. By default IPv4 address 192.88.99.1 is assigned for relay server and anycasted by ISP. Thus the default IPv6 addressfor the client must be 2002:IPv4_addr::IPv4_addr. e.g. 2002:0B0B:0B0B::0B0B:0B0B for client IPv4 address 11.11.11.11.
+6to4 encapsulates IPv6 packet in IPv4 packet. To use 6to4, A relay server and a public IPv4 address for the client is necessary. By default IPv4 address 192.88.99.1 is assigned for relay server and anycasted by ISP. Thus the default IPv6 addressfor the client must be 2002:IPv4_addr::IPv4_addr. e.g. 2002:0B0B:0B0B::0B0B:0B0B for client IPv4 address 11.11.11.11.
 
 Some ISPs(like Hurricane Electric) provides tunnelbroker service. You can get your IPv6 address and IPv4 address of the relay server from the tunnelbroker provider or use the default one.
 
@@ -44,7 +44,7 @@ The 3rd is the local IPv4 addr. If any is here, TB-TUN will not bind the local I
 
 The 4th is the tunnel mode. Currently sit for 6to4 and tunnelbroker and isatap for ISATAP are available.
 
-Note that if Remote_IPv4 address is specified, TB-TUN will only accept packages from this specified IPv4 address. So ./tb_userspace tb 192.88.99.1 any sit is not a proper way to set up 6to4 tunnel for it drops package from other IPv4 address, and only send packages to default gateway 192.88.99.1. It would cause problems when transmitting packages between 6to4 networks. (See Issue3)
+Note that if Remote_IPv4 address is specified, TB-TUN will only accept packets from this specified IPv4 address. So ./tb_userspace tb 192.88.99.1 any sit is not a proper way to set up 6to4 tunnel for it drops packet from other IPv4 address, and only send packets to default gateway 192.88.99.1. It would cause problems when transmitting packets between 6to4 networks. (See Issue3)
 
 Usually the MTU of most networks is 1500. So the MTU of IPv6 tunnel should be 1480 by removing the 20 bytes IPv4 header. To set a proper MTU that neither cause IPv6 packet be truncated nor be too small for IPv6, You'd better find the IPv4 MTU from you to your tunnel relay server by your self and set the IPv6 MTU by minus 20 bytes.
 
